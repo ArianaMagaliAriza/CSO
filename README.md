@@ -1,2 +1,2 @@
-# CSO
-Some exercise solutions from the subject "Operating Systems Concepts" (UNLP)
+# Conceptos de Sistemas Operativos (CSO) 🐧
+Resolución de algunos ejercicios de las prácticas de la materia
