@@ -3,8 +3,9 @@
 #Los dos primeros numeros como operandos
 #y un tercer argumento como operador
 #Finalmente imprime el resultado correspondiente.
+#IMPORTANTE: ojo con el producto al ejecutar el script, hay que usar \\* por el case
+#NOTA: Preferentemente hacer el if con -ne y usar los exit :)
 calculadora(){
-echo $#
 if [ $# -eq 3 ]; then
 	case $3 in
 		"+")
