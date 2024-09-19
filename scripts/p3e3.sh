@@ -1,5 +1,5 @@
 #!/bin/bash
-#Pruebo mi primer escript :)
+#Pruebo mi primer script :)
 echo "Introduzca su nombre y apellido:"
 read nombre apellido
 echo "Fecha y hora actual:"
