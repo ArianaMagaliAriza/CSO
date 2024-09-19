@@ -14,7 +14,7 @@ if [ $# -eq 3 ]; then
 		;;
 		"\*")
 		    producto=$(($1 * $2))
-	      	    echo "$1 \*  $2 =  $producto"
+	      	    echo "$1 *  $2 =  $producto"
 		;;
 		"-")
 	     	    resta=$(($1 - $2))		
