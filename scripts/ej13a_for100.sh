@@ -5,7 +5,7 @@
 for ((i=1;i<=100;i++))
 do
 	echo "i= $i"
-	cuadra=$((i * i))
+	cuadra=$((i \* i))
 	echo "i^2= $cuadra"
 done
 
