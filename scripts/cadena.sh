@@ -1,37 +1,39 @@
 #!/bin/bash
-#
+# Recibo un directorio como parámetro 
+# y renombro los nombres de todos los archivos (files) de ese directorio
+# concatenandolos con la cadena pasada también como parámetro
 
 if [ $# -ne 3 ]
 then
-	echo "Se debe aclarar el pwd, operador (-a o -b) y luego la cadena!"
+	echo "Se debe pasar el pwd, el operador (-a o -b) y la cadena"
 	exit 1
 fi
 
-if [ -e $1 ]
-then
-	directorio=$1
-	operador=$2
-	CADENA=$3
-
-	case $operador in 
-		-a) 
-			nuevo_dir="$directorio$CADENA" 
-			mv $directorio $nuevo_dir #esto cambia la ruta de un archivo o de una sola carpeta, para cambiar todas las rutas dentro de una carpeta hacer: for i in `ls $directorio`;do ;  mv $directorio/$i $directorio/$CADENA; done
-
-			;; 
-		-b)
-			nuevo_dir=$( echo $directorio | rev | cut -d'/' --complement -f1 | rev)
-			nuevo_dir="$nuevo_dir/$CADENA$(basename $directorio)"
-			mv $directorio $nuevo_dir
-			#esto solo cambia el nombre de un archivo o de un directorio, no el nombre de todos los archivos y directorios dentro de un directorio, para esto hacer: for i in `ls $directorio` ; do mv $direcotrio/$i $directorio/$CADENA$i; done
-			;;
-		*) 
-			echo "Operador incorrecto" 
-			;; 
-	esac
-
-else
-	echo "El archivo no existe"
+if [ ! -d "$1" ]; then
+  echo "El directorio $1 no existe."
+  exit 1
 fi
 
-exit 0
+directorio=$1
+opcion=$2
+cadena=$3  
+
+# Recorremos los archivos en el directorio
+for archivo in "$directorio"/*; do
+  # Verificamos si es un archivo regular
+  if [ -f "$archivo" ]; then
+    nombre_archivo=$(basename "$archivo")  # Obtengo el nombre del archivo
+    if [ "$opcion" == "-a" ]; then
+      nuevo_nombre="${directorio}/${nombre_archivo}${cadena}"  # concateno al final
+    elif [ "$opcion" == "-b" ]; then
+      nuevo_nombre="${directorio}/${cadena}${nombre_archivo}"  # concateno al inicio
+    else
+      echo "Opción no válida. Use -a para sufijo o -b para prefijo."
+      exit 1
+    fi
+
+    # Renombro el archivo
+    mv "$archivo" "$nuevo_nombre"
+    echo "Archivo renombrado: $nombre_archivo -> $(basename "$nuevo_nombre")"
+  fi
+done
