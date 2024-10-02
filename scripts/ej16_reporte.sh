@@ -11,5 +11,7 @@ fi
 for linea in $(cat /etc/passwd | cut -d: -f 1,6); do
     user=$(echo $linea | cut -d: -f1)
     home=$(echo $linea | cut -d: -f2)
-    echo "Usuario: $user - Home: $home" 
+    # echo "Usuario: $user - Home: $home"
+    if [ -d $home ]; then
+         find $home -name "*.$1" 
     done
